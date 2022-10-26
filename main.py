@@ -8,8 +8,7 @@ OPTIONS = (
 
 def choose_option(options_list):
     for option_element in options_list:
-        print(f"{option_element[0]}: {option_element[1]}\n")
-    
+        print("{}: {}\n".format(option_element[0], option_element[1]))
     while True:
         try:
             user_option = int(input("Choose an option: "))
