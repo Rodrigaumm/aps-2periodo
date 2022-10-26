@@ -1,5 +1,5 @@
 ALPHABET = list('abcdefghijklmnopqrstuvwxyz')
-SHIFT = 389012391290831902309125890123089190
+SHIFT = 21
 OPTIONS = (
     (1, "encrypt", lambda msg, shift: caesar_algorithm(msg, shift, 1)),
     (2, "decrypt", lambda msg, shift: caesar_algorithm(msg, shift, 0)),
