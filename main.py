@@ -37,7 +37,7 @@ def caesar_algorithm(msg, shift, operation_code):
             else:
                 new_index -= shift
 
-            new_index %= len(ALPHABET)
+            new_index = new_index % len(ALPHABET)
             final_msg += ALPHABET[new_index].upper() if char.isupper() else ALPHABET[new_index]
         except ValueError: 
             final_msg += char
