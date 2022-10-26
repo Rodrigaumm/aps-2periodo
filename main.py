@@ -1,6 +1,4 @@
-from string import ascii_lowercase
-
-ALPHABET = list(ascii_lowercase)
+ALPHABET = list('abcdefghijklmnopqrstuvwxyz')
 SHIFT = 389012391290831902309125890123089190
 OPTIONS = (
     (0, "encrypt", lambda msg, shift: caesar_algorithm(msg, shift, 1)),
