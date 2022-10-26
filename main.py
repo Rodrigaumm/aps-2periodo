@@ -51,14 +51,14 @@ def caesar_algorithm(msg, shift, operation_code):
 def main():
     option = choose_option(OPTIONS)
     if len(option) > 2:
-        user_msg = input("Type your message:\n")
+        user_msg = input("Type your message: ")
         while not user_msg:
             print("Empty message. Try again:\n")
+            user_msg = input("Type your message: ")
+
         
         print(option[2](user_msg, SHIFT))
-
-            
-
+       
 
 if __name__ == "__main__":
     main()
