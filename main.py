@@ -49,22 +49,39 @@ def caesar_algorithm(msg, shift, operation_code):
 print("1 - Encriptar")
 print("2 - Decriptar")
 
-# Define a variável valid_option pra false. Essa é usada na condicional
-# do loop 
+# Define a variável should_continue pra True. Essa é usada na condicional
+# do loop
 should_continue = True
 while should_continue:
+    # Pede uma opção ao usuário
     user_option = input("\nEscolha: ")
 
+    # Caso o usuário tenha digitado 1,
+    # troca o valor da variável should_continue para False
+    # para que o loop pare de repetir e chama a função caesar_algorithm
+    # passando para ela a mensagem do usuário, o shift que é uma
+    # constante e o parâmetro que indica para a função que a mensagem
+    # deve ser encriptada.
     if user_option == "1":
         should_continue = False
 
         msg = input("Mensagem: ")
         print(caesar_algorithm(msg, SHIFT, "e"))
+
+    # Caso o usuário tenha digitado 2,
+    # troca o valor da variável should_continue para False
+    # para que o loop pare de repetir e chama a função caesar_algorithm
+    # passando para ela a mensagem pedida ao usuário, o shift que é uma constante
+    # e o parâmetro que indica para a função que a mensagem deve ser decriptada.
     elif user_option == "2":
         should_continue = False
 
         msg = input("Mensagem: ")
         print(caesar_algorithm(msg, SHIFT, "d"))
+
+    # Caso o usuário não tenha digitado nem 1 nem 2,
+    # mostre uma mensagem de erro e não altere o valor da variável de controle do loop
+    # para que ela continue True e o loop continue repetindo
     else:
         print("Opção inválida, tente novamente")
         
