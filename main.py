@@ -1,61 +1,71 @@
-ALPHABET = list('abcdefghijklmnopqrstuvwxyz')
+alphabet = list('abcdefghijklmnopqrstuvwxyz')
 SHIFT = 21
-OPTIONS = (
-    (1, "encrypt", lambda msg, shift: caesar_algorithm(msg, shift, 1)),
-    (2, "decrypt", lambda msg, shift: caesar_algorithm(msg, shift, 0)),
-)
-
-
-def choose_option(options_list):
-    for option_element in options_list:
-        print("{}: {}\n".format(option_element[0], option_element[1]))
-    while True:
-        try:
-            user_option = int(input("Choose an option: "))
-
-            option = None
-            for menu_option in options_list:
-                if menu_option[0] == user_option:
-                    option = tuple(menu_option)
-
-            if option is None:
-                raise ValueError()
-            else:
-                return option
-        except ValueError:
-            print("Invalid option, try again")
 
 
 def caesar_algorithm(msg, shift, operation_code):
+    # Cria uma string vazia que será preenchida
+    # com cada letra da mensagem original porém encriptada/desencriptada
     final_msg = ""
     for char in msg:
-        try:
-            # ALPHABET.index(char.lower()) raises a ValueError if there is no such item in the list.
-            new_index = ALPHABET.index(char.lower())
-            if operation_code:
+        # Verifica se a letra atual convertida pra minúscula
+        # está contida no alfabeto
+        if char.lower() in alphabet:
+            
+            # Atribui à variável new_index a posição
+            # da letra atual no alfabeto. Ex: a - 0, b - 1, etc...
+            new_index = alphabet.index(char.lower())
+
+            # A função recebe operation_code == "e" para encriptar
+            # e operation_code == "d" para decriptar
+            if operation_code == "e":
                 new_index += shift
-            else:
+            elif operation_code == "d":
                 new_index -= shift
 
-            new_index = new_index % len(ALPHABET)
-            final_msg += ALPHABET[new_index].upper() if char.isupper() else ALPHABET[new_index]
-        except ValueError: 
+            new_index = new_index % len(alphabet)
+
+            # Caso a letra original da mensagem seja maíscula
+            # a letra encriptada/decriptada também será maíscula
+            # no texto de final_msg
+            if char.isupper():
+                final_msg += alphabet[new_index].upper()
+            else:
+                final_msg += alphabet[new_index]
+        
+        # Caso a letra atual não esteja no alfabeto
+        # não efetua nenhuma encriptação/decriptação.
+        # Apenas repete o caractere no texto final
+        else: 
             final_msg += char
 
+    # Após o loop percorrer todas as letras da mensagem original,
+    # encriptar/decriptar cada uma, a função retorna o texto final, que foi
+    # gerado letra a letra a partir da mensagem do usuário (mensagem original)
     return final_msg
 
 
-def main():
-    option = choose_option(OPTIONS)
-    if len(option) > 2:
-        user_msg = input("Type your message: ")
-        while not user_msg:
-            print("Empty message. Try again:\n")
-            user_msg = input("Type your message: ")
 
+# Printa as opções para o usuário
+print("1 - Encriptar")
+print("2 - Decriptar")
+
+# Define a variável valid_option pra false. Essa é usada na condicional
+# do loop 
+should_continue = True
+while should_continue:
+    user_option = input("\nEscolha: ")
+
+    if user_option == "1":
+        should_continue = False
+
+        msg = input("Mensagem: ")
+        print(caesar_algorithm(msg, SHIFT, "e"))
+    elif user_option == "2":
+        should_continue = False
+
+        msg = input("Mensagem: ")
+        print(caesar_algorithm(msg, SHIFT, "d"))
+    else:
+        print("Opção inválida, tente novamente")
         
-        print(option[2](user_msg, SHIFT))
-       
 
-if __name__ == "__main__":
-    main()
